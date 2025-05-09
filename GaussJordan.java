@@ -9,7 +9,6 @@ public class GaussJordan {
         // La matriz es 3x3 y se va llenando los datos para que los usuarios puedan ingresar los datos
         double[][] matriz = new double[3][3];
         System.out.println("Ingrese los coeficientes de la matriz fila por fila, separados por espacios:");
-        scanner.nextLine();
         for (int i = 0; i < 3; i++) {
             String[] filaStr = scanner.nextLine().split(" ");
             if (filaStr.length != 3) {
