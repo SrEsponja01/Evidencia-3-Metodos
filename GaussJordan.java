@@ -6,11 +6,10 @@ public class GaussJordan {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-
-        //La matriz es 3x3 y se va llenando los datos para que los usuarios puedan ingresar los datos
+        // La matriz es 3x3 y se va llenando los datos para que los usuarios puedan ingresar los datos
         double[][] matriz = new double[3][3];
         System.out.println("Ingrese los coeficientes de la matriz fila por fila, separados por espacios:");
-        scanner.nextLine(); 
+        scanner.nextLine();
         for (int i = 0; i < 3; i++) {
             String[] filaStr = scanner.nextLine().split(" ");
             if (filaStr.length != 3) {
@@ -31,7 +30,7 @@ public class GaussJordan {
 
         // Solicitar los términos independientes
         double[] b = new double[3];
-        System.out.println("Ingrese los términos independientes (b1 b2 ... bn) separados por espacios:");
+        System.out.println("Ingrese los términos independientes (b1 b2 b3) separados por espacios:");
         String[] bStr = scanner.nextLine().split(" ");
         if (bStr.length != 3) {
             System.out.println("Número incorrecto de términos independientes. El programa terminará.");
@@ -58,7 +57,7 @@ public class GaussJordan {
         System.out.println("\nMatriz aumentada inicial:");
         imprimirMatriz(matrizAumentada);
 
-        // 1Aplicar el método de Gauss-Jordan
+        // Aplicar el método de Gauss-Jordan
         int numFilas = matrizAumentada.length;
         int numColumnas = matrizAumentada[0].length;
 
@@ -76,7 +75,7 @@ public class GaussJordan {
                 double[] temp = matrizAumentada[i];
                 matrizAumentada[i] = matrizAumentada[filaPivote];
                 matrizAumentada[filaPivote] = temp;
-                System.out.printf("\nIntercambio de filas y ", i + 1, filaPivote + 1);
+                System.out.printf("\nIntercambio de filas %d y %d:%n", i + 1, filaPivote + 1);
                 imprimirMatriz(matrizAumentada);
             }
 
@@ -86,7 +85,7 @@ public class GaussJordan {
                 for (int j = i; j < numColumnas; j++) {
                     matrizAumentada[i][j] /= pivote;
                 }
-                System.out.printf("\nDividiendo la fila  por ", i + 1, pivote);
+                System.out.printf("\nDividiendo la fila %d por %.4f:%n", i + 1, pivote);
                 imprimirMatriz(matrizAumentada);
             } else {
                 System.out.println("\nEl sistema no tiene una solución única o tiene infinitas soluciones (pivote cero).");
@@ -101,16 +100,16 @@ public class GaussJordan {
                     for (int k = i; k < numColumnas; k++) {
                         matrizAumentada[j][k] -= factor * matrizAumentada[i][k];
                     }
-                    System.out.printf("\nEliminando elementos en la columna %d usando la fila: ", i + 1, i + 1);
+                    System.out.printf("\nEliminando elementos en la columna %d usando la fila %d:%n", i + 1, i + 1);
                     imprimirMatriz(matrizAumentada);
                 }
             }
         }
 
-        // 6. Mostrar la solución
+        // Mostrar la solución
         System.out.println("\nSolución del sistema:");
         for (int i = 0; i < numFilas; i++) {
-            System.out.printf("x = ", i + 1, matrizAumentada[i][numColumnas - 1]);
+            System.out.printf("x%d = %.4f%n", i + 1, matrizAumentada[i][numColumnas - 1]);
         }
 
         scanner.close();
